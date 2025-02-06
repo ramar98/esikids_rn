@@ -4,9 +4,10 @@ import { colores } from '../colores'
 import { url } from '../url'
 import { InputWithImage } from '../components/inputWithImage'
 import { ButtonLogIn } from '../components/ButtonLogIn'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const NewPasswordScreen = ({ route, navigation }) => {
-    const params  = route.params;
+    const params = route.params;
 
     const [error, setError] = useState('');
     const [errorMsj, setErrorMsj] = useState('')
@@ -66,13 +67,13 @@ const NewPasswordScreen = ({ route, navigation }) => {
             <Image source={require('../assets/images/logoEsikids2.png')} style={styles.logoESIKids} />
             <View style={styles.rectangule1}>
                 <Text style={styles.text1}>Por favor, ingresa una nueva contraseña.</Text>
-                <Text style={[styles.text1,{fontSize:15, fontWeight:400}]}>Recuerda que debe contener al menos 8 caracteres.</Text>
+                <Text style={[styles.text1, { fontSize: 15, fontWeight: 400 }]}>Recuerda que debe contener al menos 8 caracteres.</Text>
             </View>
             <InputWithImage
                 imageSource={require('../assets/images/pass_icon.png')} // Reemplaza con la ruta de tu imagen
                 placeholder="Nueva contraseña"
                 value={password}
-                onChangeText={setPassword}
+                onChangeText={(text) => { setPassword(text); setError(''); setErrorMsj('') }}
                 isPassword={true}
             />
             {error === 'password' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
@@ -80,7 +81,7 @@ const NewPasswordScreen = ({ route, navigation }) => {
                 imageSource={require('../assets/images/pass_icon.png')} // Reemplaza con la ruta de tu imagen
                 placeholder="Repite la nueva contraseña"
                 value={confirmPassword}
-                onChangeText={setConfirmPassword}
+                onChangeText={(text) => { setConfirmPassword(text); setError(''); setErrorMsj('') }}
                 isPassword={true}
             />
             {error === 'confirmPassword' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
@@ -92,10 +93,11 @@ const NewPasswordScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     image: {
         flex: 1,
+        justifyContent: 'center',
     },
     logoESIKids: {
-        height: 280,
-        width: 280,
+        height: 200,
+        width: 200,
         alignSelf: 'center',
         marginTop: 60,
     },

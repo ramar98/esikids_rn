@@ -6,7 +6,8 @@ import { InputWithImage } from '../components/inputWithImage'
 import { ButtonLogIn } from '../components/ButtonLogIn'
 
 const CodeVerificationScreen = ({ route, navigation }) => {
-    const params  = route.params;
+    const params = route.params;
+    const username = params.username;
 
     const [error, setError] = useState('');
     const [errorMsj, setErrorMsj] = useState('')
@@ -25,7 +26,7 @@ const CodeVerificationScreen = ({ route, navigation }) => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: params.username,
+                        username: username,
                         code: code
                     })
                 });
@@ -34,7 +35,7 @@ const CodeVerificationScreen = ({ route, navigation }) => {
                 console.log(result);
 
                 if (result.success === true) {
-                    navigation.navigate('NewPassword', { username: params.username });
+                    navigation.navigate('NewPassword', { username: username });
                 }
                 else {
                     setError('code');
@@ -51,13 +52,13 @@ const CodeVerificationScreen = ({ route, navigation }) => {
 
     const reenviar = async () => {
         try {
-            const response = await fetch(url + 'api/sendCode', {
+            const response = await fetch(url + 'api/sendVerificationCode', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: params.username
+                    username: username
                 })
             });
 
@@ -66,6 +67,10 @@ const CodeVerificationScreen = ({ route, navigation }) => {
             if (result.success !== true) {
                 setError('codeSend');
                 setErrorMsj('Algo salio mal, intenta de nuevo mas tarde');
+            }
+            else {
+                setError('codeSend');
+                setErrorMsj('Email reenviado. Por favor, revisa tu casilla');
             }
 
         } catch (error) {
@@ -84,12 +89,12 @@ const CodeVerificationScreen = ({ route, navigation }) => {
                 imageSource={require('../assets/images/pass_icon.png')} // Reemplaza con la ruta de tu imagen
                 placeholder="Codigo de verificación"
                 value={code}
-                onChangeText={setCode}
+                onChangeText={(text) => { setCode(text); setError(''); setErrorMsj('') }}
             />
             {error === 'code' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
             <ButtonLogIn marginBottom={10} text='Verificar código' onPress={() => procesar()} />
             {error === 'codeSend' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: 5 }}>{errorMsj}</Text> : null}
-            <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop:30 }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 30 }}>
                 <Text style={styles.text2}>¿No recibiste el correo? </Text>
                 <Text style={[styles.text2, { color: colores.color9, textDecorationLine: 'underline' }]} onPress={() => reenviar()} >Reenviar.</Text>
             </View>
@@ -100,12 +105,14 @@ const CodeVerificationScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     image: {
         flex: 1,
+        justifyContent: 'center',
     },
     logoESIKids: {
-        height: 280,
-        width: 280,
+        height: 200,
+        width: 200,
         alignSelf: 'center',
-        marginTop: 60,
+        position: 'relative',
+        top: -30
     },
     rectangule1: {
         shadowColor: colores.color11,

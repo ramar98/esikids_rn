@@ -35,7 +35,7 @@ const RecoveryPasswordScreen = ({ navigation }) => {
                 }
                 else {
                     setError('username');
-                    setErrorMsj('El usuario no existe');
+                    setErrorMsj('Usuario no encontrado. Ingrese un nombre de usuario que se encuentre registrado en la aplicación');
                 }
 
             } catch (error) {
@@ -67,10 +67,11 @@ const RecoveryPasswordScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     image: {
         flex: 1,
+        justifyContent: 'center',
     },
     logoESIKids: {
-        height: 280,
-        width: 280,
+        height: 200,
+        width: 200,
         alignSelf: 'center',
         marginTop: 60,
     },
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
         width: '90%',
         alignSelf: 'center',
         marginTop: 10,
-        marginBottom: 30
+        marginBottom: 30,
+        padding: 5
     },
     text1: {
         color: colores.color4,

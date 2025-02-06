@@ -13,4 +13,5 @@ export const colores = {
     color12: 'white',           //white
     color13: '#00B69E',         //turqueza
     color14: '#6f6f6f',         //gris oscuro
+    color15: '#004AAD',         //azul marino
 }

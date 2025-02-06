@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { colores } from '../colores';
 
-export function InputWithImage (props) {
-    const { imageSource, placeholder, value, onChangeText, isPassword, onTouchStart, editable } = props;
+export function InputWithImage(props) {
+    const { imageSource, placeholder, value, onChangeText, isPassword, onTouchStart, editable, marginTop, keyboardType } = props;
 
     const [isSecure, setIsSecure] = useState(isPassword);
 
@@ -12,7 +12,7 @@ export function InputWithImage (props) {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { marginTop: marginTop }]}>
             <Image source={imageSource} style={styles.image} />
             <TextInput
                 style={styles.input}
@@ -22,6 +22,7 @@ export function InputWithImage (props) {
                 secureTextEntry={isSecure}
                 onTouchStart={onTouchStart}
                 editable={editable}
+                keyboardType={keyboardType}
             />
             {isPassword && (
                 <TouchableOpacity onPress={toggleSecureEntry}>
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
     input: {
         height: 42,
         width: '70%',
+        color: colores.color11,
     },
     toggleIcon: {
         resizeMode: 'contain',

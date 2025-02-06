@@ -5,8 +5,8 @@ import {ButtonStart} from '../components/ButtonStart'
 
 const RegisteredUserScreen = ({ route, navigation }) => {
     const params = route.params;
-    const name = params.nomApe.split(' ')[0].toUpperCase();
-    const lastName = params.nomApe.split(' ')[1].toUpperCase();
+    const name = params.nombre.toUpperCase();
+    const lastName = params.apellido.toUpperCase();
 
     return (
         <ImageBackground source={require('../assets/images/fondo1.png')} style={styles.image}>

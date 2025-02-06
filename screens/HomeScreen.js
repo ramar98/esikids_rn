@@ -2,14 +2,26 @@
 import { colores } from "../colores";
 import React, { useEffect } from 'react';
 import { url } from '../url';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation, route }) => {
-    
+
     const params = route.params;
-     useEffect(() => {
-        console.log(params)
+
+    useEffect(() => {
+        saveToken(params.token);
     }
-    , [])
+        , [])
+
+    const saveToken = async (token) => {
+        try {
+            await AsyncStorage.setItem('userToken', token);
+            console.log('Token saved successfully');
+        } catch (error) {
+            console.error('Failed to save the token', error);
+        }
+    };
+
     return (
 
         <ImageBackground source={require('../assets/images/fondohome.jpg')} resizeMode='cover' style={styles.image}>
@@ -26,28 +38,39 @@ const HomeScreen = ({ navigation, route }) => {
             <View style={styles.modulos}>
                 <View>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Games')} style={styles.modulo1}>
+                        onPress={() => navigation.navigate('Games')} style={[styles.modulo, { backgroundColor: colores.color6 }]}>
                         <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" source={require('../assets/images/joystickhome.png')} />
                         <Text style={styles.text3}>JUEGA Y APRENDE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('ChatBot')} style={styles.modulo2}>
+                        onPress={() => navigation.navigate('ChatBot')} style={[styles.modulo, { backgroundColor: colores.color9 }]}>
                         <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" source={require('../assets/images/bothome.png')} />
                         <Text style={styles.text3}>ASISTENTE VIRTUAL</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('ChatBot')} style={[styles.modulo, { backgroundColor: colores.color1 }]}>
+                        <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" source={require('../assets/images/bothome.png')} />
+                        <Text style={styles.text3}>MI PERFIL</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Resourcess')} style={styles.modulo3}  >
+                        onPress={() => navigation.navigate('Resourcess')} style={[styles.modulo, { backgroundColor: colores.color7 }]}  >
                         <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" source={require('../assets/images/resourceshome.png')} />
                         <Text style={styles.text3}>RECURSOS ESI</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Progress')} style={styles.modulo4}>
+                        onPress={() => navigation.navigate('Progress')} style={[styles.modulo, { backgroundColor: colores.color15 }]}>
                         <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" source={require('../assets/images/progresshome.png')} />
                         <Text style={styles.text3}>TUS PROGRESOS</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Courses')} style={[styles.modulo, { backgroundColor: colores.color4 }]}>
+                        <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 25 }} resizeMode="contain" />
+                        <Text style={styles.text3}>MIS CURSOS</Text>
+                    </TouchableOpacity>
                 </View>
+
             </View>
         </ImageBackground>
     )
@@ -79,31 +102,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 20
     },
-    modulo1: {
+    modulo: {
         width: 150,
         height: 180,
         marginBottom: 20,
-        backgroundColor: colores.color6,
-        borderRadius: 20
-    },
-    modulo2: {
-        width: 150,
-        height: 180,
-        backgroundColor: colores.color9,
-        borderRadius: 20
-    },
-    modulo3: {
-        width: 150,
-        height: 180,
-        marginBottom: 20,
-        backgroundColor: colores.color7,
-        borderRadius: 20
-    },
-    modulo4: {
-        width: 150,
-        height: 180,
-        backgroundColor: colores.color1,
-        borderRadius: 20
+        borderRadius: 20,
     },
     gato: {
         width: 120,

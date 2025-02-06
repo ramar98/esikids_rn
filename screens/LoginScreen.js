@@ -3,11 +3,12 @@ import { View, ImageBackground, StyleSheet, Image, Text, ScrollView } from 'reac
 import { ButtonLogIn } from '../components/ButtonLogIn'
 import { colores } from '../colores'
 import { url } from '../url'
-import { InputWithImage } from '../components/inputWithImage'
+import { InputWithImage } from '../components/inputWithImage';
 
 const LoginScreen = ({ navigation }) => {
-    const [pass, setPass] = useState('Holala10')
-    const [username, setusername] = useState('ramiro')
+
+    const [pass, setPass] = useState('')
+    const [username, setusername] = useState('')
     const [error, setError] = useState('')
     const [errorMsj, setErrorMsj] = useState('')
 
@@ -65,7 +66,10 @@ const LoginScreen = ({ navigation }) => {
                     imageSource={require('../assets/images/user_icon.png')} // Reemplaza con la ruta de tu imagen
                     placeholder="Usuario"
                     value={username}
-                    onChangeText={setusername}
+                    onChangeText={(text) => {
+                        setusername(text);
+                        setError('');
+                    }}
                 />
                 {error === 'username' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -10, marginBottom: 5 }}>{errorMsj}</Text> : null}
                 <Text onPress={() => navigation.navigate('RecoveryUser')} style={styles.texto2}>¿Olvidaste tu usuario?</Text>
@@ -73,13 +77,16 @@ const LoginScreen = ({ navigation }) => {
                     imageSource={require('../assets/images/pass_icon.png')} // Reemplaza con la ruta de tu imagen
                     placeholder="Contraseña"
                     value={pass}
-                    onChangeText={setPass}
+                    onChangeText={(text) => {
+                        setPass(text);
+                        setError('');
+                    }}
                     isPassword={true}
                 />
                 {error === 'password' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -10, marginBottom: 5 }}>{errorMsj}</Text> : null}
                 <Text onPress={() => navigation.navigate('RecoveryPassword')} style={styles.texto2}>¿Olvidaste tu contraseña?</Text>
                 <ButtonLogIn style={{ marginTop: 40 }} text='Iniciar Sesión' onPress={() => procesar()} />
-                {error === 'credentials' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -10, marginBottom: 5 }}>{errorMsj}</Text> : null}
+                {error === 'credentials' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -10, marginBottom: 5 }}>{errorMsj}</Text> : null}               
                 <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                     <Text style={styles.texto1}>¿Aun no tiene una cuenta? </Text>
                     <Text style={styles.texto3} onPress={() => navigation.navigate('ChoiseUser')} >Únete aqui.</Text>

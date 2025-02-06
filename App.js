@@ -10,11 +10,11 @@ import ChatBot from "./screens/ChatBotScreen";
 import MemoryScreen from "./screens/MemoryScreen";
 import ProgressScreen from "./screens/ProgressScreen";
 import PuzleStagesScreen from "./screens/PuzleStagesScreen";
+import ChoiseUserScreen from "./screens/ChoiseUserScreen";
 import MemoryStagesScreen from "./screens/MemoryStagesScreen";
 import ResourcessScreen from "./screens/ResourcessScrenn";
-import RegisterScreenStudent from "./screens/RegisterScreenStudent";
-import RegisterScreenTeacher from "./screens/RegisterScreenTeacher";
-import ChoiseUserScreen from "./screens/ChoiseUserScreen";
+import RegisterScreenUser from "./screens/RegisterScreenUser";
+import RegisterScreenUser2 from "./screens/RegisterScreenUser2";
 import RegisteredUserScreen from "./screens/RegisteredUserScreen";
 import RecoveryPasswordScreen from "./screens/RecoveryPasswordScreen";
 import CodeVerificationScreen from "./screens/CodeVerificationScreen";
@@ -22,6 +22,9 @@ import NewPasswordScreen from "./screens/NewPasswordScreen";
 import PasswordChangedScreen from "./screens/PasswordChangedScreen";
 import RecoveryUserScreen from "./screens/RecoveryUserScreen";
 import UsersSendScreen from "./screens/UsersSendScreen";
+import CoursesScreen from "./screens/CoursesScreen";
+import AddCourseScreen from "./screens/AddCourseScreen";
+import AvatarScreen from "./screens/AvatarScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -29,6 +32,12 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Avatar" component={AvatarScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="RegisterUser" component={RegisterScreenUser} options={{ headerShown: false }} />
+        <Stack.Screen name="RegisterUser2" component={RegisterScreenUser2} options={{ headerShown: false }} />
+        <Stack.Screen name="ChoiseUser" component={ChoiseUserScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="AddCourse" component={AddCourseScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Courses" component={CoursesScreen} options={{ headerShown: false }} />
         <Stack.Screen name="UsersSend" component={UsersSendScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RecoveryUser" component={RecoveryUserScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PasswordChanged" component={PasswordChangedScreen} options={{ headerShown: false }} />
@@ -36,10 +45,7 @@ function App() {
         <Stack.Screen name="CodeVerification" component={CodeVerificationScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RecoveryPassword" component={RecoveryPasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RegisteredUser" component={RegisteredUserScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="RegisterStudent" component={RegisterScreenStudent} options={{ headerShown: false }} />
-        <Stack.Screen name="RegisterTeacher" component={RegisterScreenTeacher} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="ChoiseUser" component={ChoiseUserScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Games" component={GamesScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PuzleStages" component={PuzleStagesScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Puzle" component={PuzleScreen} options={{ headerShown: false }} />

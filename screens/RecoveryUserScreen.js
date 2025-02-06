@@ -18,7 +18,7 @@ const RecoveryUserScreen = ({ navigation }) => {
         }
         else if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             setError('email');
-            setErrorMsj('El email no es valido');
+            setErrorMsj('Correo no válido. Formato: example@dominio.com');
         }
         else {
             try {
@@ -39,7 +39,7 @@ const RecoveryUserScreen = ({ navigation }) => {
                 }
                 else {
                     setError('email');
-                    setErrorMsj('Algo salio mal, intenta de nuevo mas tarde');
+                    setErrorMsj('El correo electrónico no se encuentra registrado en la aplicación');
                 }
 
             } catch (error) {
@@ -60,7 +60,7 @@ const RecoveryUserScreen = ({ navigation }) => {
                 imageSource={require('../assets/images/email_icon.png')} // Reemplaza con la ruta de tu imagen
                 placeholder="Correo electrónico"
                 value={email}
-                onChangeText={setEmail}
+                onChangeText={(text) => {setEmail(text); setError(''); setErrorMsj(''); }}
             />
             {error === 'email' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
             <ButtonLogIn marginBottom={50} text='Enviar' onPress={() => procesar()} />

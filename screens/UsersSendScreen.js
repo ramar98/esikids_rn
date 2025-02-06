@@ -6,7 +6,6 @@ import { ButtonLogIn } from '../components/ButtonLogIn'
 
 const UsersSendScreen = ({ navigation, route }) => {
 
-    const [error, setError] = useState('')
     const [errorMsj, setErrorMsj] = useState('')
 
     const params = route.params;
@@ -26,8 +25,10 @@ const UsersSendScreen = ({ navigation, route }) => {
             const result = await response.json();
 
             if (result.success !== true) {
-                setError('email');
                 setErrorMsj('Algo salio mal, intenta de nuevo mas tarde');
+            }
+            else {
+                setErrorMsj('Email reenviado. Por favor, revisa tu casilla');
             }
 
         } catch (error) {
@@ -44,8 +45,8 @@ const UsersSendScreen = ({ navigation, route }) => {
                 <Text style={styles.text1}>Te enviamos un correo electrónico con los usuarios asociados a tu mail. Por favor revisa tu bandeja de entrada.</Text>
             </View>
             <Image source={require('../assets/images/robot_icon.png')} style={styles.robot} />
-            <ButtonLogIn marginBottom={50} text='Iniciar Sesión' onPress={() => navigation.navigate('Login')} />
-            {error === 'email' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
+            <ButtonLogIn marginBottom={20} text='Iniciar Sesión' onPress={() => navigation.navigate('Login')} />
+            {errorMsj !== '' ? <Text style={{ color: 'red', textAlign: 'center', marginTop: -5 }}>{errorMsj}</Text> : null}
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                 <Text style={styles.text2}>¿No recibiste el correo? </Text>
                 <Text style={[styles.text2, { color: colores.color9, textDecorationLine: 'underline' }]} onPress={() => procesar()} >Reenviar.</Text>
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontStyle: 'normal',
         fontWeight: 'bold',
+        marginTop: 30
     },
 });
 

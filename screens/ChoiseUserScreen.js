@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
-import { View, ImageBackground, StyleSheet, TouchableOpacity, Image, Text, ScrollView } from 'react-native'
+import { View, ImageBackground, StyleSheet, TouchableOpacity, Image, Text } from 'react-native'
 import { colores } from '../colores'
 const ChoiseUserScreen = ({ navigation }) => {
 
     return (
         <ImageBackground source={require('../assets/images/fondo1.png')} style={styles.image}>
-            <ScrollView style={{ flex: 1 }}>
-                <Image source={require('../assets/images/logoEsikids2.png')} style={styles.logoESIKids} />
-                <View style={styles.rectangule1}>
-                    <Text style={styles.text1}>¡Regístrate para jugar y aprender con nosotros!</Text>
-                </View>
-                <Text style={styles.text2}>¿Qué tipo de usuario eres?</Text>
-                <TouchableOpacity style={[styles.rectangule2, { backgroundColor: colores.color13 }]} onPress={() => navigation.navigate('RegisterStudent')}>
-                    <Image style={{width:102, height:102}} source={require('../assets/images/student_icon.png')} />
-                    <Text style={styles.text3}>ALUMNO</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.rectangule2, { backgroundColor: colores.color4 }]} onPress={() => navigation.navigate('RegisterTeacher')}>
-                    <Image source={require('../assets/images/teacher_icon.png')} />
-                    <Text style={[styles.text3, { marginLeft: 10 }]}>DOCENTE</Text>
-                </TouchableOpacity>
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                    <Text style={styles.text4}>¿Ya tienes una cuenta? </Text>
-                    <Text style={[styles.text4, { color: colores.color9, textDecorationLine:'underline' }]} onPress={() => navigation.navigate('Login')} >Ingresa aquí.</Text>
-                </View>
-            </ScrollView>
+            <Image source={require('../assets/images/logoEsikids2.png')} style={styles.logoESIKids} />
+            <View style={styles.rectangule1}>
+                <Text style={styles.text1}>¡Regístrate para jugar y aprender con nosotros!</Text>
+            </View>
+            <Text style={styles.text2}>¿Qué tipo de usuario eres?</Text>
+            <TouchableOpacity style={[styles.rectangule2, { backgroundColor: colores.color13 }]} onPress={() => navigation.navigate('RegisterUser', { rol: 'student' })}>
+                <Image style={{ width: 102, height: 102 }} source={require('../assets/images/student_icon.png')} />
+                <Text style={styles.text3}>ALUMNO</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.rectangule2, { backgroundColor: colores.color4 }]} onPress={() => navigation.navigate('RegisterUser', { rol: 'teacher' })}>
+                <Image source={require('../assets/images/teacher_icon.png')} />
+                <Text style={[styles.text3]}>DOCENTE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.rectangule2, { backgroundColor: colores.color13 }]} onPress={() => navigation.navigate('RegisterUser', { rol: 'tutor' })}>
+                <Image source={require('../assets/images/padretutor_icon.png')} />
+                <Text style={[styles.text3]}>PADRE/TUTOR</Text>
+            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <Text style={styles.text4}>¿Ya tienes una cuenta? </Text>
+                <Text style={[styles.text4, { color: colores.color9, textDecorationLine: 'underline' }]} onPress={() => navigation.navigate('Login')} >Ingresa aquí.</Text>
+            </View>
         </ImageBackground>
     )
 }
@@ -33,8 +35,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logoESIKids: {
-        height: 200,
-        width: 200,
+        height: 150,
+        width: 150,
         alignSelf: 'center',
         marginTop: 50,
         marginBottom: -10
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     },
     rectangule2: {
         borderRadius: 10,
-        width: '55%',
+        width: '60%',
         alignSelf: 'center',
         marginTop: 30,
         flexDirection: 'row',
